@@ -4,8 +4,15 @@ interface Users{
      name:string
 }
 export default async function Users() {
-     let res = await fetch('https://jsonplaceholder.typicode.com/users');
+     let res = await fetch('https://jsonplaceholder.typicode.com/users',
+          {
+               next:{
+                    revalidate:5
+               }
+          }
+     );
      let users:Users[] = await res.json();
+     console.log(users)
      return (
           <div>
                <ul>
