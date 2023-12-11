@@ -1,25 +1,16 @@
-import React from 'react'
-interface Users{
-     id:number,
-     name:string
-}
+'use client'
+import React, { Suspense } from 'react'
+import UserTable from '../components/UserTable';
+
 export default async function Users() {
-     let res = await fetch('https://jsonplaceholder.typicode.com/users',
-          {
-               next:{
-                    revalidate:5
-               }
-          }
-     );
-     let users:Users[] = await res.json();
-     console.log(users)
+   
      return (
           <div>
-               <ul>
-                    {
-                         users.map((user)=> <li key={user.id}>{user.name}</li>)
-                    }
-               </ul>   
+               <div className="overflow-x-auto">
+                    <Suspense fallback={<p>loading ........</p>}>
+                         <UserTable/>
+                    </Suspense>
+               </div>
           </div>
      )
 }
