@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import schema from "../schema";
 
 export function GET (request:NextRequest,{params}:{params:{id:number}}) {
      console.log(params.id)
@@ -10,8 +11,9 @@ export function GET (request:NextRequest,{params}:{params:{id:number}}) {
 
 export async function PUT (request:NextRequest,{params}:{params:{id:number}}) {
      const body = await request.json();
-     if(!body.name)
-          return NextResponse.json({error:"Empty not Found name"},{status:404})
+     const  validation = schema.safeParse(body)
+     if(!validation)
+          return NextResponse.json(validation.error.errors , {status:404})
      if(params.id > 10){
           return NextResponse.json({error:"User not Found"},{status:404})
        }
@@ -21,8 +23,9 @@ export async function PUT (request:NextRequest,{params}:{params:{id:number}}) {
 
 export async function DELETE (request:NextRequest,{params}:{params:{id:number}}) {
      const body = await request.json();
-     if(!body.name)
-          return NextResponse.json({error:"Empty not Found name"},{status:404})
+     const  validation = schema.safeParse(body)
+     if(!validation)
+          return NextResponse.json(validation.error.errors , {status:404})
      if(params.id > 10){
           return NextResponse.json({error:"User not Found"},{status:404})
        }
