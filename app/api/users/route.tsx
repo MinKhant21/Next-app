@@ -12,5 +12,17 @@ export const POST = async (request:NextRequest) => {
      const  validation = schema.safeParse(body)
      if(!validation.success)
           return NextResponse.json(validation.error.errors , {status:404})
-     return NextResponse.json({id:1,name:body.name})
+     let checkUser = await prisma.user.findUnique({
+          where:{
+               email : body.email,
+          }
+     })
+     if(checkUser)
+          return NextResponse.json({error:"user already exit"} , {status:404})
+     const user = await prisma.user.create({
+          data:{
+               email : body.email,
+          }
+     })
+     return NextResponse.json(user)
 }
