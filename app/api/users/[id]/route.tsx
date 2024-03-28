@@ -17,15 +17,14 @@ export async function GET(
   return NextResponse.json(user);
 }
 
+
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const body = await request.json();
   const validation = schema.safeParse(body);
-
-  if (parseInt(params.id) > 10)
-    return NextResponse.json({ error: "User not Found" }, { status: 404 });
 
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 404 });
@@ -40,7 +39,7 @@ export async function PUT(
     where: {
       id: parseInt(params.id),
     },
-    data: { email: body.email },
+    data: {name: body.name, email: body.email },
   });
   return NextResponse.json(user);
 }
@@ -51,9 +50,7 @@ export async function DELETE(
 ) {
   const body = await request.json();
   const validation = schema.safeParse(body);
-  if (parseInt(params.id) > 10)
-    return NextResponse.json({ error: "User not Found" }, { status: 404 });
-
+ 
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 404 });
 
