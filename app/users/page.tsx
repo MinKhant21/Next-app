@@ -2,13 +2,17 @@
 import React, { Suspense } from 'react'
 import UserTable from '../components/UserTable';
 
-export default async function Users() {
-   
+interface Props{
+     searchParams :{sortOrder : string}
+}
+
+export default async function Users({searchParams:{sortOrder}}:Props) {
+     console.log(sortOrder)
      return (
           <div>
                <div className="overflow-x-auto">
                     <Suspense fallback={<p>loading ........</p>}>
-                         <UserTable/>
+                         <UserTable sortOrder={sortOrder}/>
                     </Suspense>
                </div>
           </div>
