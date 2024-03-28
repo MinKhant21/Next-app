@@ -1,10 +1,10 @@
 -- CreateTable
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NULL,
     `email` VARCHAR(191) NOT NULL,
-    `follwers` INTEGER NOT NULL DEFAULT 0,
-    `isActive` BOOLEAN NOT NULL DEFAULT false,
+    `name` VARCHAR(191) NULL,
+    `followers` INTEGER NOT NULL DEFAULT 0,
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
