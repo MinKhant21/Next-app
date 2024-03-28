@@ -8,7 +8,7 @@ export default async function Home() {
   let session = await getServerSession(authOptions)
   return (
     <>
-    <p>{session.user!.name}</p>
+    { session && <p>{session.user!.name}</p>}
     Home Page</>
   )
 }
