@@ -1,7 +1,13 @@
+'use client'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export default function NewUser() {
+  const router = useRouter();
   return (
-    <div>NewUser</div>
+    <div>NewUser
+
+      <button className=' btn btn-primary' onClick={()=>router.push('/users')}>Create</button>
+    </div>
   )
 }
