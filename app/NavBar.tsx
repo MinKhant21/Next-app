@@ -1,17 +1,15 @@
 'use client'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
-import React from 'react'
-
-export default function NavBar() {
-  const { status , data:session} = useSession();
+import Link from "next/link"
+import { usePathname } from "next/navigation";
+function NavBar() {
+     const pathname = usePathname();
   return (
-    <div className='flex p-5 bg-slate-400 space-x-5'>
-     <Link href="/" className=' text-md mr-3'>Next Js</Link>
-     <Link href="/users" className=' text-md'>Users</Link>
-     { status === 'authenticated' &&  <div>{session.user!.name}</div>}
-     { status === 'authenticated' &&  <Link href="/api/auth/signout" className=' text-md'>Sign Out</Link>}
-     { status === 'unauthenticated' &&  <Link href="/api/auth/signin" className=' text-md'>Sign in</Link>}
+    <div className=" flex gap-10 my-5">
+     <Link href="/" className={`link ${pathname === '/' ? 'active text-orange-700' : ""}`}>Home</Link>
+     <Link href="/posts" className={`link ${pathname === '/posts' ? 'active text-orange-700' : ""}`}>posts</Link>
+     <Link href="/login" className={`link ${pathname === 'login' ? 'active' : ''}`} >Login</Link>
     </div>
   )
 }
+
+export default NavBar

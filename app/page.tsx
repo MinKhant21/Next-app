@@ -1,14 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ProductAddToCart from './components/ProductAddToCart'
-import { authOptions } from './api/auth/[...nextauth]/route'
-import { getServerSession } from 'next-auth'
-
+import Wallpaper from '../public/wallpaper.jpeg'
 export default async function Home() {
-  let session = await getServerSession(authOptions)
   return (
     <>
-    { session && <p>{session.user!.name}</p>}
-    Home Page</>
+    <Link href="/login">Login</Link>
+    <p>Home Page</p>
+      <Image alt='image' width={100} height={100} src={Wallpaper} />
+    </>
   )
 }
